@@ -1,91 +1,98 @@
 
 import { useState } from 'react'
 
-function Login({ onGoSignup }) {
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
-    const [message, setMessage] = useState('')
+function Login({ onGoSignup, onLoginSuccess }) {
 
-    async function handleLogin(event) {
-        event.preventDefault()
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [message, setMessage] = useState('')
+  const [loading, setLoading] = useState(false)
 
-        setMessage('Connecting to backend...')
+  async function handleLogin(event) {
+    event.preventDefault()
 
-        try {
-            // Send login data to FastAPI
-            const response = await fetch(
-                'http://127.0.0.1:8000/api/login',
-                {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        username: username,
-                        password: password
-                    })
-                }
-            )
+    setLoading(true)
+    setMessage('Checking credentials...')
 
-            // wait for response from backend
-            const data = await response.json()
+    try {
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+          username,
+          password
+        })
+      })
 
-            if (!response.ok) {
-                setMessage(data.detail || 'Login failed.')
-                return
-            }
+      const data = await response.json()
 
-            // Real authentication will be added later
-            setMessage('Server responded, LOGIN NOT YET IMPLEMENTED.')
+      if (!response.ok) {
+        setMessage(
+          typeof data.detail === 'string'
+            ? data.detail
+            : 'Login failed.'
+        )
+        return
+      }
 
-        } catch {
-            setMessage('Cannot connect to FastAPI.')
+      // Backend confirmed the login, fetched from fetch('/api/login'
+      onLoginSuccess(data.user) 
 
-        } finally {
-            setPassword('')
-        }
+    } catch {
+      setMessage('Cannot connect to the server.')
+
+    } finally {
+      setPassword('')
+      setLoading(false)
     }
+  }
 
-    return (
+  return (
+    <div>
+      <h1>Digital Forensics Case Preparation Tool</h1>
+      <h2>Login</h2>
+
+      <form onSubmit={handleLogin}>
+
         <div>
-            <h1>Digital Forensics Case Preparation Tool</h1>
-            <h2>Login</h2>
-
-            <form onSubmit={handleLogin}>
-                <div>
-                    <label htmlFor="username">Username:</label>
-                    <input
-                        id="username"
-                        type="text"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        required
-                    />
-                </div>
-
-                <div>
-                    <label htmlFor="password">Password:</label>
-                    <input
-                        id="password"
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                </div>
-
-                <button type="submit">Login</button>
-            </form>
-
-            <p role="status">{message}</p>
-
-            <p>Don't have an account?</p>
-
-            <button type="button" onClick={onGoSignup}>
-                Sign Up
-            </button>
+          <label htmlFor="username">Username:</label>
+          <input
+            id="username"
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            autoComplete="username"
+            required
+          />
         </div>
-    )
+
+        <div>
+          <label htmlFor="password">Password:</label>
+          <input
+            id="password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            autoComplete="current-password"
+            required
+          />
+        </div>
+
+        <button type="submit" disabled={loading}>
+          {loading ? 'Logging in...' : 'Login'}
+        </button>
+      </form>
+
+      <p role="status">{message}</p>
+
+      <button type="button" onClick={onGoSignup}>
+        Sign Up
+      </button>
+    </div>
+  )
 }
 
 export default Login

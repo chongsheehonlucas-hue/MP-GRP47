@@ -24,7 +24,7 @@ function Signup({ onGoLogin }) {
     try {
       // Send registration information to FastAPI
       const response = await fetch(
-        'http://127.0.0.1:8000/api/register',
+        '/api/register',
         {
           method: 'POST',
           headers: {
