@@ -1,2 +1,6 @@
 fastapi[standard]
 SQLAlchemy>=2.0,<3.0
+pwdlib[argon2]
+email-validator
+itsdangerous
+python-dotenv
