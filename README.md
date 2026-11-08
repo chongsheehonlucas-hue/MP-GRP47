@@ -11,6 +11,12 @@ run these commands for the first time if you havent:
 cd frontend
 Run in terminal --> npm.cmd ci
 
+# Backend environment
+cd backend
+
+py -3.13 -m venv .venv
+
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
 
 # Whenever you want to start the website , run this
 cd frontend
