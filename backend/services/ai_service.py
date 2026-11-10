@@ -22,19 +22,32 @@ SYSTEM_PROMPTS = {
 }
 
 
-def generate_ai_response(message: str, mode: str):
+
+def generate_ai_response(
+    message: str,
+    mode: str,
+    history: list[dict] | None = None
+):
+    messages = [
+        {
+            "role": "system",
+            "content": SYSTEM_PROMPTS[mode]
+        }
+    ]
+
+    # Add previous conversation messages
+    if history:
+        messages.extend(history)
+ 
+    # Add the user's newest question
+    messages.append({
+        "role": "user",
+        "content": message
+    })
+
     response = chat(
         model=MODEL,
-        messages=[
-            {
-                "role": "system",
-                "content": SYSTEM_PROMPTS[mode]
-            },
-            {
-                "role": "user",
-                "content": message
-            }
-        ]
+        messages=messages
     )
 
     return response.message.content
