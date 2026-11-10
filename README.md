@@ -14,8 +14,8 @@ Run in terminal --> npm.cmd ci
 # Backend environment
 cd backend
 
-py -3.13 -m venv .venv
-
+py -3.13(python_version) -m venv .venv
+.\.venv\Scripts\Activate.ps1
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
 
 # Whenever you want to start the website , run this
