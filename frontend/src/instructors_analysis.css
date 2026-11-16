@@ -1,0 +1,291 @@
+/* Basic colours and font for this page */
+.instructor-analysis {
+  --text: #626976;
+  --heading: #171f2e;
+  --background: #f4f5f7;
+  --border: #d9dde3;
+  --accent: #e6be43;
+
+  font-family: system-ui, 'Segoe UI', sans-serif;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--text);
+  background: var(--background);
+  min-height: 100vh;
+  text-align: left;
+}
+
+/* Include padding in element widths */
+.instructor-analysis * {
+  box-sizing: border-box;
+}
+
+/* Top navigation */
+.analysis-header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
+  padding: 20px;
+  background: var(--heading);
+  color: white;
+  border-bottom: 4px solid var(--accent);
+}
+
+.analysis-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.analysis-logo {
+  padding: 4px 12px;
+  background: var(--accent);
+  color: var(--heading);
+  font-size: 28px;
+}
+
+.analysis-brand small {
+  display: block;
+  font-size: 14px;
+}
+
+.analysis-navigation {
+  color: var(--accent);
+}
+
+.analysis-role {
+  margin-left: auto;
+}
+
+/* Main page area */
+.analysis-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 28px 20px;
+}
+
+.analysis-heading {
+  margin-bottom: 24px;
+}
+
+/* Headings */
+.instructor-analysis h1,
+.instructor-analysis h2,
+.instructor-analysis h3 {
+  color: var(--heading);
+  font-weight: 600;
+}
+
+.instructor-analysis h1 {
+  font-size: 32px;
+  margin: 12px 0;
+}
+
+.instructor-analysis h2 {
+  font-size: 24px;
+  margin: 0 0 16px;
+}
+
+.instructor-analysis h3 {
+  font-size: 20px;
+  margin: 12px 0;
+}
+
+.instructor-analysis p {
+  margin: 10px 0;
+}
+
+.analysis-eyebrow {
+  font-size: 16px;
+}
+
+/* Summary cards */
+.analysis-summary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.analysis-stat {
+  padding: 20px;
+  background: white;
+  border: 1px solid var(--border);
+}
+
+.analysis-stat > strong {
+  display: block;
+  font-size: 30px;
+  color: var(--heading);
+}
+
+.analysis-stat small {
+  display: block;
+  margin-top: 8px;
+  font-size: 16px;
+}
+
+/* Sections */
+.analysis-panel {
+  padding: 20px;
+  margin-bottom: 24px;
+  background: white;
+  border: 1px solid var(--border);
+}
+
+.analysis-section-heading {
+  margin-bottom: 20px;
+}
+
+.analysis-section-heading > span {
+  font-size: 16px;
+}
+
+/* Module results */
+.analysis-modules {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.analysis-module {
+  padding: 12px;
+  border-bottom: 2px solid var(--border);
+}
+
+.analysis-module-score {
+  display: block;
+  font-size: 28px;
+  color: var(--heading);
+}
+
+.analysis-module small {
+  display: block;
+  font-size: 16px;
+}
+
+.analysis-module progress {
+  width: 100%;
+  height: 12px;
+  margin-top: 12px;
+  accent-color: var(--accent);
+}
+
+/* Search box */
+.analysis-search {
+  display: block;
+  margin-bottom: 20px;
+}
+
+.analysis-search input {
+  display: block;
+  width: 100%;
+  max-width: 380px;
+  margin-top: 8px;
+  padding: 10px;
+  border: 1px solid var(--border);
+  background: white;
+  color: var(--heading);
+  font: inherit;
+}
+
+/* Results table */
+.analysis-table-wrapper {
+  overflow-x: auto;
+}
+
+.analysis-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 18px;
+}
+
+.analysis-table th,
+.analysis-table td {
+  padding: 14px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+
+.analysis-table th {
+  background: var(--background);
+  color: var(--heading);
+}
+
+.analysis-table td strong,
+.analysis-table td small {
+  display: block;
+}
+
+.analysis-table td small {
+  font-size: 16px;
+}
+
+.analysis-status {
+  font-size: 16px;
+}
+
+.analysis-status-support {
+  padding: 4px 8px;
+  background: #fff0c5;
+  color: #795b08;
+}
+
+/* Buttons */
+.instructor-analysis button {
+  padding: 10px 14px;
+  margin-top: 8px;
+  border: 1px solid var(--border);
+  background: white;
+  color: var(--heading);
+  font: inherit;
+  cursor: pointer;
+}
+
+.instructor-analysis button:hover {
+  background: #fff4cf;
+}
+
+.instructor-analysis button:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+
+/* Keyboard focus */
+.instructor-analysis :focus-visible {
+  outline: 2px solid #a67c00;
+  outline-offset: 3px;
+}
+
+/* Messages */
+.analysis-error {
+  padding: 16px;
+  margin-bottom: 20px;
+  background: #ffe8e3;
+  color: #822b1c;
+}
+
+.analysis-message {
+  padding: 16px 0;
+}
+
+.analysis-note {
+  font-size: 16px;
+}
+
+/* Basic mobile layout */
+@media (max-width: 650px) {
+  .analysis-summary,
+  .analysis-modules {
+    grid-template-columns: 1fr;
+  }
+
+  .analysis-content {
+    padding: 20px 12px;
+  }
+
+  .analysis-role {
+    margin-left: 0;
+  }
+}
