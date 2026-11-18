@@ -2,6 +2,8 @@
 // The student's home page after login. Built to match the approved student design.
 // All numbers come from STUDENT_SAMPLE for now. Later they will come from the database.
 
+import '../styles/tokens.css'
+import '../styles/dashboard.css'
 import Header from '../components/Header.jsx'
 import Footer from '../components/Footer.jsx'
 import StepStrip from '../components/StepStrip.jsx'
@@ -9,7 +11,7 @@ import ProgressBar from '../components/ProgressBar.jsx'
 import Icon from '../components/Icon.jsx'
 import { MODULES, CASES } from '../data/courseContent.js'
 import { STUDENT_SAMPLE } from '../data/studentSample.js'
-import { STUDENT_HOME, comingSoon } from '../data/links.js'
+import { NOT_BUILT_YET } from '../data/links.js'
 
 /* ---------- Calculations (design spec, section 4.7) ---------- */
 
@@ -98,7 +100,7 @@ function ModuleCard({ module, done, isNext }) {
         <ProgressBar percent={percent} label={module.title + ' progress'} />
 
         <div className="card__actions">
-          <a className={buttonClass} href={comingSoon(module.title)} aria-label={buttonLabel + ' ' + module.title}>
+          <a className={buttonClass} href={NOT_BUILT_YET} aria-label={buttonLabel + ' ' + module.title}>
             {buttonLabel}
             {isNext && <Icon name="arrowRight" size={18} />}
           </a>
@@ -129,7 +131,7 @@ function CaseCard({ caseItem }) {
       </div>
 
       <div className="card__bottom">
-        <a className="btn btn--secondary btn--full" href={comingSoon(caseItem.title)} aria-label={'Start case: ' + caseItem.title}>
+        <a className="btn btn--secondary btn--full" href={NOT_BUILT_YET} aria-label={'Start case: ' + caseItem.title}>
           Start case
         </a>
       </div>
@@ -139,8 +141,9 @@ function CaseCard({ caseItem }) {
 
 /* ---------- The whole page ---------- */
 
-// userName: the logged-in student's name. The preview page doesn't send one, so it shows [Name].
-function StudentDashboard({ userName }) {
+// userName: the logged-in student's name (App.jsx sends it in).
+// onLogout: what Log out does (App.jsx sends this in).
+function StudentDashboard({ userName, onLogout }) {
   const student = STUDENT_SAMPLE
   const displayName = userName || student.name // use the real name if we have one
 
@@ -178,18 +181,18 @@ function StudentDashboard({ userName }) {
   }
 
   const menuLinks = [
-    { label: 'Home', href: STUDENT_HOME, isCurrent: true },
-    { label: 'Quiz history', href: comingSoon('Quiz history'), isCurrent: false },
+    { label: 'Home', href: '#', isCurrent: true }, // you are already on Home
+    { label: 'Quiz history', href: NOT_BUILT_YET, isCurrent: false },
   ]
 
   return (
     <div className="app">
       <Header
-        homeLink={STUDENT_HOME}
         searchPlaceholder="Search modules, topics or cases"
         menuLinks={menuLinks}
         userName={displayName}
         roleLabel="Student"
+        onLogout={onLogout}
       />
 
       <main className="page">

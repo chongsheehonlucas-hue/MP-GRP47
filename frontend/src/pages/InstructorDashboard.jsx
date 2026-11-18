@@ -2,6 +2,8 @@
 // The instructor's home page after login. Built to match the approved instructor design.
 // All numbers come from INSTRUCTOR_SAMPLE for now. Later they will come from the database.
 
+import '../styles/tokens.css'
+import '../styles/dashboard.css'
 import Header from '../components/Header.jsx'
 import Footer from '../components/Footer.jsx'
 import StepStrip from '../components/StepStrip.jsx'
@@ -9,7 +11,7 @@ import ProgressBar from '../components/ProgressBar.jsx'
 import Icon from '../components/Icon.jsx'
 import { MODULES, CASES } from '../data/courseContent.js'
 import { INSTRUCTOR_SAMPLE } from '../data/instructorSample.js'
-import { INSTRUCTOR_HOME, STUDENT_ANALYSIS, comingSoon } from '../data/links.js'
+import { NOT_BUILT_YET } from '../data/links.js'
 
 /* ---------- Calculations (design spec, section 5.9) ---------- */
 
@@ -63,12 +65,12 @@ function ModuleCard({ module, stats, totalStudents }) {
 
         <div className="card__actions">
           {/* Review = see the module as a student sees it. Edit = change its content. */}
-          <a className="btn btn--secondary" href={comingSoon('Review ' + module.title)} aria-label={'Review ' + module.title}>
+          <a className="btn btn--secondary" href={NOT_BUILT_YET} aria-label={'Review ' + module.title}>
             <Icon name="eye" size={18} />
             Review
           </a>
           {/* Open item: the content editor is an optional add-on, so Edit is a placeholder for now */}
-          <a className="btn btn--primary" href={comingSoon('Edit ' + module.title)} aria-label={'Edit ' + module.title + ' content'}>
+          <a className="btn btn--primary" href={NOT_BUILT_YET} aria-label={'Edit ' + module.title + ' content'}>
             <Icon name="pencil" size={18} />
             Edit
           </a>
@@ -110,11 +112,11 @@ function CaseCard({ caseItem, stats }) {
 
       <div className="card__bottom">
         <div className="card__actions card__actions--split">
-          <a className="btn btn--secondary" href={comingSoon('Review ' + caseItem.title)} aria-label={'Review ' + caseItem.title}>
+          <a className="btn btn--secondary" href={NOT_BUILT_YET} aria-label={'Review ' + caseItem.title}>
             <Icon name="eye" size={18} />
             Review
           </a>
-          <a className="btn btn--primary" href={comingSoon('Edit ' + caseItem.title)} aria-label={'Edit ' + caseItem.title + ' content'}>
+          <a className="btn btn--primary" href={NOT_BUILT_YET} aria-label={'Edit ' + caseItem.title + ' content'}>
             <Icon name="pencil" size={18} />
             Edit
           </a>
@@ -126,8 +128,10 @@ function CaseCard({ caseItem, stats }) {
 
 /* ---------- The whole page ---------- */
 
-// userName: the logged-in instructor's name. The preview page doesn't send one, so it shows [Name].
-function InstructorDashboard({ userName }) {
+// userName: the logged-in instructor's name (App.jsx sends it in).
+// onLogout: what Log out does. onOpenStudentAnalysis: opens the Student analysis page.
+// App.jsx sends both in.
+function InstructorDashboard({ userName, onLogout, onOpenStudentAnalysis }) {
   const data = INSTRUCTOR_SAMPLE
   const displayName = userName || data.name // use the real name if we have one
 
@@ -153,19 +157,19 @@ function InstructorDashboard({ userName }) {
   ]
 
   const menuLinks = [
-    { label: 'Home', href: INSTRUCTOR_HOME, isCurrent: true },
-    // The Student analysis page is built by a groupmate (see links.js)
-    { label: 'Student analysis', href: STUDENT_ANALYSIS, isCurrent: false },
+    { label: 'Home', href: '#', isCurrent: true }, // you are already on Home
+    // The Student analysis page is built by a groupmate. Clicking asks App.jsx to show it.
+    { label: 'Student analysis', href: '#', isCurrent: false, onClick: onOpenStudentAnalysis },
   ]
 
   return (
     <div className="app">
       <Header
-        homeLink={INSTRUCTOR_HOME}
         searchPlaceholder="Search students, modules or cases"
         menuLinks={menuLinks}
         userName={displayName}
         roleLabel="Instructor"
+        onLogout={onLogout}
       />
 
       <main className="page">
@@ -270,7 +274,8 @@ function InstructorDashboard({ userName }) {
                 <ul className="attention-list">
                   {flaggedStudents.map((student) => (
                     <li key={student.id}>
-                      <a className="attention-link" href={comingSoon(student.name + ' results')}>
+                      {/* Opens the Student analysis page, where the instructor can pick this student */}
+                      <a className="attention-link" href="#" onClick={onOpenStudentAnalysis}>
                         <span className="attention-link__text">
                           <span className="attention-link__name">{student.name}</span>
                           <span className="attention-link__reason">{attentionReason(student)}</span>
@@ -292,7 +297,7 @@ function InstructorDashboard({ userName }) {
               <p className="side-card__text">
                 {data.reportCount} reports generated so far. Open a student to read their reports.
               </p>
-              <a className="link-arrow" href={STUDENT_ANALYSIS}>
+              <a className="link-arrow" href="#" onClick={onOpenStudentAnalysis}>
                 Go to student analysis
                 <Icon name="arrowRight" size={16} />
               </a>

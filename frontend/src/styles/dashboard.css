@@ -137,10 +137,12 @@ body { margin: 0; }
   padding: 8px 14px;
   border: 1px solid var(--navy-600);
   border-radius: var(--radius-sm);
+  background: transparent;
   color: #fff;
+  font-family: var(--font-body);
   font-size: 14px;
   font-weight: 600;
-  text-decoration: none;
+  cursor: pointer;
 }
 .btn-logout:hover { color: #fff; border-color: var(--on-navy-muted); }
 
@@ -366,7 +368,3 @@ body { margin: 0; }
   font-size: 13px;
   color: var(--text-subtle);
 }
-
-/* ===== 13. "Coming soon" placeholder page ===== */
-.placeholder { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; }
-.placeholder__card { max-width: 520px; padding: 32px; gap: 12px; }

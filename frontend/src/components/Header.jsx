@@ -1,17 +1,17 @@
 // Header.jsx
 // The navy bar at the top of every dashboard page, plus the yellow "evidence tape" stripe.
 // The student and instructor pages give it different menu links and text.
+// onLogout: what to do when Log out is clicked (App.jsx sends this in).
 
 import Icon from './Icon.jsx'
-import { comingSoon } from '../data/links.js'
 
-function Header({ homeLink, searchPlaceholder, menuLinks, userName, roleLabel }) {
+function Header({ searchPlaceholder, menuLinks, userName, roleLabel, onLogout }) {
   return (
     <>
       <header className="site-header">
         <div className="site-header__inner">
-          {/* 1. Logo (links back to the home page) */}
-          <a className="brand" href={homeLink}>
+          {/* 1. Logo. You are already on the home page, so it goes nowhere for now. */}
+          <a className="brand" href="#">
             <span className="brand__mark">
               <Icon name="shield" size={22} />
             </span>
@@ -37,6 +37,7 @@ function Header({ homeLink, searchPlaceholder, menuLinks, userName, roleLabel })
                 key={link.label}
                 className="nav__link"
                 href={link.href}
+                onClick={link.onClick}
                 aria-current={link.isCurrent ? 'page' : undefined}
               >
                 {link.label}
@@ -55,8 +56,9 @@ function Header({ homeLink, searchPlaceholder, menuLinks, userName, roleLabel })
                 <span className="user__role">{roleLabel}</span>
               </span>
             </span>
-            {/* Placeholder for now. The real log out belongs to the login feature. */}
-            <a className="btn-logout" href={comingSoon('Log out')}>Log out</a>
+            <button className="btn-logout" type="button" onClick={onLogout}>
+              Log out
+            </button>
           </div>
         </div>
       </header>
