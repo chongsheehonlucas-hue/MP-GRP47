@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routes.auth import router as auth_router
 from routes.chat import router as chat_router
+from routes.profile import router as profile_router
 
 import os
 from pathlib import Path
@@ -46,3 +47,6 @@ app.include_router(chat_router, prefix="/api")
 @app.get("/api/health")
 def health():
     return {"status": "ok"}
+
+# import the profile router and include it in the FastAPI app
+app.include_router(profile_router, prefix="/api")
