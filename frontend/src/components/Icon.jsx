@@ -1,6 +1,6 @@
 // Icon.jsx
 // Draws one small line icon. Example: <Icon name="laptop" size={22} />
-// The shapes come from the design spec (section 8).
+// Icon shapes come from, or are drawn in the style of, the Lucide icon set (lucide.dev, ISC licence).
 
 // Each icon is a list of SVG shapes.
 // <> and </> group several shapes together without adding an extra tag.

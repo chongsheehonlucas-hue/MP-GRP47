@@ -1,7 +1,6 @@
 /* dashboard.css
    Styles for the student and instructor dashboards.
    Colours, fonts and sizes come from tokens.css (the var(--...) values).
-   Based on the design spec, sections 3 and 7.
 
    Every dashboard sits inside <div className="app">, and the rules below only
    style things inside it. Think of .app as a fence: our styles stay inside,

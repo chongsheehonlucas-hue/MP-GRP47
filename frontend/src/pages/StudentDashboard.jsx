@@ -12,7 +12,7 @@ import { MODULES, CASES } from '../data/courseContent.js'
 import { STUDENT_SAMPLE } from '../data/studentSample.js'
 import { NOT_BUILT_YET } from '../data/links.js'
 
-/* ---------- Calculations (design spec, section 4.7) ---------- */
+/* ---------- Calculations ---------- */
 
 // Percentage of one module done, e.g. 2 of 6 sub-modules = 33
 function getModulePercent(module, done) {
