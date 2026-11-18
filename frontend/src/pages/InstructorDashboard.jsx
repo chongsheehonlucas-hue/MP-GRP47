@@ -5,7 +5,6 @@
 import '../styles/tokens.css'
 import '../styles/dashboard.css'
 import Header from '../components/Header.jsx'
-import Footer from '../components/Footer.jsx'
 import StepStrip from '../components/StepStrip.jsx'
 import ProgressBar from '../components/ProgressBar.jsx'
 import Icon from '../components/Icon.jsx'
@@ -305,8 +304,6 @@ function InstructorDashboard({ userName, onLogout, onOpenStudentAnalysis }) {
           </aside>
         </div>
       </main>
-
-      <Footer />
     </div>
   )
 }

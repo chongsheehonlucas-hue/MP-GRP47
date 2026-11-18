@@ -354,17 +354,3 @@ body { margin: 0; }
 
 /* Grey box shown when there is nothing to list yet */
 .empty { margin: 0; padding: 14px; border-radius: var(--radius-md); background: var(--bg); font-size: 14px; color: var(--text-muted); }
-
-/* ===== 12. Footer ===== */
-.site-footer { border-top: 1px solid var(--border); }
-.site-footer__inner {
-  max-width: calc(var(--container) + 48px); /* 1200px of content + 24px padding on each side */
-  margin: 0 auto;
-  padding: 20px 24px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 8px 24px;
-  font-size: 13px;
-  color: var(--text-subtle);
-}
