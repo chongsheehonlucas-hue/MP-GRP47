@@ -1,12 +1,12 @@
-# MP-GRP47 — One-click Windows Development Setup
+# MP-GRP47 — Project Development Setup
 
-**For teammates using Windows 10/11, PowerShell, VS Code.**  
+**For clients using Windows 10/11, PowerShell, VS Code.**  
 **Project:** Digital Forensics Case Preparation & Readiness Tool  
 **Stack:** React + Vite, FastAPI + Python 3.15, SQLite, Ollama with `qwen3:4b-instruct`.
 
 ## Quickest setup (recommended)
 
-1. Clone or download your team's **MP-GRP47** GitHub repository so that you have both `frontend` and `backend` folders.
+1. Clone or download the **MP-GRP47** GitHub repository so that you have both `frontend` and `backend` folders.
 2. Extract all three files from `MP-GRP47_Windows_Setup.zip` into the **MP-GRP47 root folder** (beside `frontend` and `backend`). Don't put them inside either folder.
 3. Review `setup.ps1` if desired, then **double-click `SETUP_MP-GRP47.cmd`**.
 4. If software is missing, approve the prompted installation through Windows Package Manager (`winget`). The setup will:
@@ -21,7 +21,7 @@
    - Run `ollama pull qwen3:4b-instruct` (a **~2.5 GB** download).
 5. If the installer asks you to **restart VS Code or PowerShell**, close it, reopen it, and **double-click the launcher again**. Re-running the setup is supported and won't replace a valid existing session key.
 
-**Internet access and available storage are required for first-time downloads.** These local development tools are free to use, but your computer will supply processing power and electricity. The script does **not** download or alter your team's code; it installs local prerequisites. It does not install VS Code or Git, which are optional once the project folder is available.
+**Internet access and available storage are required for first-time downloads.** These local development tools are free to use. It does not install VS Code or Git, which are optional once the project folder is available.
 
 ### Software download links (manual method)
 - Python 3.15: https://www.python.org/downloads/
@@ -112,4 +112,4 @@ ollama list
 - Do not commit any machine's `.venv` or `node_modules`.
 - The `.cmd` launcher uses an **execution-policy override for its own PowerShell process only**; it does not change your PC's permanent PowerShell execution policy. Inspect the script before running it, especially if shared outside your group.
 - This installs an **Ollama local development setup**, not a publicly hosted AI server. Other users need their own Ollama model or a group-hosted service to query the AI.
-- The setup package was generated separately and has **not been tested on each team member's PC**. Installation success depends on network, local permissions and the current project `requirements.txt`.
+
