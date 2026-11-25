@@ -18,6 +18,7 @@ py -3.13(python_version) -m venv .venv
 .\.venv\Scripts\Activate.ps1
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
 
+host backend: .\.venv\Scripts\python.exe -m uvicorn main:app --reload
 # Whenever you want to start the website , run this
 cd frontend
 npm.cmd run dev
@@ -34,3 +35,4 @@ need to run 'cd frontend' as the npm packages are stored in the frontend folder
 10/30 - hosting backend '.\.venv\Scripts\python.exe -m uvicorn main:app --reload'
 
 11/4 - Initialized users db using SQLite (forensics.db) | schema.sql designs the db, while init_db initializes it.
+ 
