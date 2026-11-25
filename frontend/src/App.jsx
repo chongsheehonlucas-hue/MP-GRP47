@@ -3,42 +3,117 @@ import { useState } from "react";
 import Login from "./pages/login.jsx";
 import Signup from "./pages/signup.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
+import InstructorAnalysis from "./pages/instructors_analysis.jsx";
+import StudentDashboard from "./pages/StudentDashboard.jsx";
+import InstructorDashboard from "./pages/InstructorDashboard.jsx";
 
 function App() {
   // Login remains the default page
   const [page, setPage] = useState("login");
 
+  // Store the logged-in user's information
+  const [user, setUser] = useState(null);
+
+  // Called after successful login
+  function handleLoginSuccess(userData) {
+    setUser(userData);
+
+    if (userData.role === "instructor") {
+      setPage("instructor");
+    } else {
+      setPage("learner");
+    }
+  }
+
+  // Log out and return to the login page
+  async function handleLogout() {
+    try {
+      const response = await fetch("/api/logout", {
+        method: "POST",
+        credentials: "include",
+      });
+
+      if (!response.ok) {
+        throw new Error("Logout failed.");
+      }
+
+      setUser(null);
+      setPage("login");
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  }
+
   return (
     <>
+      {/* Login Page */}
       {page === "login" && (
-        <>
-          <Login
-            onGoSignup={() => setPage("signup")}
-          />
-
-          {/* Temporary button to test the Profile page */}
-          <button
-            type="button"
-            onClick={() => setPage("profile")}
-          >
-            My Profile
-          </button>
-        </>
+        <Login
+          onGoSignup={() => setPage("signup")}
+          onLoginSuccess={handleLoginSuccess}
+        />
       )}
 
+      {/* Signup Page */}
       {page === "signup" && (
         <Signup
           onGoLogin={() => setPage("login")}
         />
       )}
-{/* if page === "profile" display profilepage */}
-      {page === "profile" && (
+
+      {/* Instructor Dashboard */}
+      {page === "instructor" && user && (
+        <>
+          <button onClick={() => setPage("profile")}>
+            My Profile
+          </button>
+
+          <InstructorDashboard
+            userName={user.username}
+            onLogout={handleLogout}
+            onOpenStudentAnalysis={() => setPage("analysis")}
+          />
+        </>
+      )}
+
+      {/* Instructor Analysis Page */}
+      {page === "analysis" && user && (
+        <>
+          <button onClick={() => setPage("instructor")}>
+            Back to Dashboard
+          </button>
+
+          <InstructorAnalysis />
+        </>
+      )}
+
+      {/* Student Dashboard */}
+      {page === "learner" && user && (
+        <>
+          <button onClick={() => setPage("profile")}>
+            My Profile
+          </button>
+
+          <StudentDashboard
+            userName={user.username}
+            onLogout={handleLogout}
+          />
+        </>
+      )}
+
+      {/* Profile Page */}
+      {page === "profile" && user && (
         <>
           <button
-            type="button"
-            onClick={() => setPage("login")}
+            onClick={() =>
+              setPage(
+                user.role === "instructor"
+                  ? "instructor"
+                  : "learner"
+              )
+            }
           >
-            Back to Login
+            Back to Dashboard
           </button>
 
           <ProfilePage />
