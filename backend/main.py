@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from routes.auth import router as auth_router
 from routes.chat import router as chat_router
 from routes.instructors import router as instructor_router
+from routes.profile import router as profile_router
 
 import os
 from pathlib import Path
@@ -48,3 +49,6 @@ app.include_router(instructor_router, prefix="/api")
 @app.get("/api/health")
 def health():
     return {"status": "ok"}
+
+# import the profile router and include it in the FastAPI app
+app.include_router(profile_router, prefix="/api")
