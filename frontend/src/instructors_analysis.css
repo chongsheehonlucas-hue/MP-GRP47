@@ -409,3 +409,16 @@
     min-height: auto;
   }
 }
+/* Display the dashboard button as plain navigation text */
+.instructor-analysis .analysis-back-button {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  color: white;
+}
+
+/* Keep the background clear when hovering */
+.instructor-analysis .analysis-back-button:hover {
+  background: transparent;
+  color: var(--accent);
+}

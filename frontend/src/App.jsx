@@ -49,7 +49,8 @@ function App() {
 
   // Student analysis page, opened from the instructor dashboard
   if (page === 'analysis') {
-    return <InstructorAnalysis />
+    return <InstructorAnalysis
+    onBackToDashboard={() => setPage('instructor')} />
   }
 
   if (page === 'learner') {

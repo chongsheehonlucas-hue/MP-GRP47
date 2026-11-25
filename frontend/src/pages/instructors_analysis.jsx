@@ -5,7 +5,7 @@ function scoreToPercentage(value) {
     return value == null ? '-' : `${value}%`
 }
 
-function InstructorAnalysis() {
+function InstructorAnalysis({ onBackToDashboard }) {
     const [data, setData] = useState(null)
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState('')
@@ -89,6 +89,10 @@ function InstructorAnalysis() {
             <small>Digital Forensics Case Preparation</small>
           </div>
         </div>
+
+        <button type="button" className="analysis-back-button" onClick={onBackToDashboard}>
+          Back to dashboard
+        </button>
 
         <span className="analysis-navigation">
           Student Analysis
