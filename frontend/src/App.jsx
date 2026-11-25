@@ -78,13 +78,9 @@ function App() {
 
       {/* Instructor Analysis Page */}
       {page === "analysis" && user && (
-        <>
-          <button onClick={() => setPage("instructor")}>
-            Back to Dashboard
-          </button>
-
-          <InstructorAnalysis />
-        </>
+        <InstructorAnalysis
+          onBackToDashboard={() => setPage("instructor")}
+        />
       )}
 
       {/* Student Dashboard */}
